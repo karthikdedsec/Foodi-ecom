@@ -47,8 +47,8 @@ const Categories = () => {
               />
             </div>
             <div className="mt-5 space-y-1 text-center">
-              <h5>{item.title}</h5>
-              <p>{item.des}</p>
+              <h5 className="text-[#1E1E1E] font-semibold">{item.title}</h5>
+              <p className="text-sm text-[#555]">{item.des}</p>
             </div>
           </div>
         ))}
