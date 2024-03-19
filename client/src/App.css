@@ -19,3 +19,6 @@ body {
 .heartStar {
   border-radius: 0px 0px 0px 28px;
 }
+body {
+  @apply bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%;
+}

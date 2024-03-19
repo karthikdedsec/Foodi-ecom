@@ -85,7 +85,7 @@ const SpecialDishes = () => {
     prevArrow: <simplePrevArrow />,
   };
   return (
-    <div className="section-container my-20 relative">
+    <div className="section-container my-20 relative bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
       <div className="text-left">
         <p className="subtitle">Special Dishes</p>
         <h2 className="title md:w-[520px]">Standout Dishes From Our Menu</h2>
@@ -110,7 +110,7 @@ const SpecialDishes = () => {
       <Slider
         ref={slider}
         {...settings}
-        className="overflow-hidden mt-10 space-x-5"
+        className="overflow-hidden mt-10 space-x-2 "
       >
         {recipes.map((recipe) => (
           <Cards key={recipe._id} recipes={recipe} />
