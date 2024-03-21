@@ -11,9 +11,9 @@ const Cards = ({ recipes }) => {
 
   return (
     <div>
-      <div className="card card-compact w-96 bg-base-100 shadow-xl relative ">
+      <div className="card card-compact  bg-base-100 shadow-xl relative ">
         <div
-          className={`rating gap-1 absolute right-0 top-2 p-4 heartStar bg-bGreen ${
+          className={`rating gap-1 absolute right-0 top-0 p-4 heartStar bg-bGreen ${
             isLiked ? "!text-rose-500" : "!text-white"
           }`}
           onClick={handleHeartClick}

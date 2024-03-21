@@ -22,3 +22,12 @@ body {
 body {
   @apply bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%;
 }
+
+.slick-slide div {
+  margin: 0 16px;
+}
+
+.active {
+  color: #39db4a;
+  text-decoration-line: underline;
+}
