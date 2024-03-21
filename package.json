@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon api/app.js",
-    "start": "node api/app.js"
+    "start": "node api/app.js",
+    "seeder": "node api/seeder/seeder.js"
   },
   "author": "karthik",
   "license": "ISC",
