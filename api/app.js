@@ -17,10 +17,9 @@ dotenv.config({ path: "api/config/config.env" });
 
 connectDataBase();
 
-app.use(express.json());
-
 app.use("/api/v1", ProductRoute);
 
+app.use(express.json());
 app.use(errorMiddleware);
 
 const server = app.listen(process.env.PORT, () => {
