@@ -4,6 +4,7 @@ import ProductRoute from "./routes/product.route.js";
 import AuthRoute from "./routes/auth.route.js";
 import { connectDataBase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -18,6 +19,7 @@ dotenv.config({ path: "api/config/config.env" });
 
 connectDataBase();
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/v1", ProductRoute);
 app.use("/api/v1", AuthRoute);
