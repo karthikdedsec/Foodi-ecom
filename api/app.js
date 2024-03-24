@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import ProductRoute from "./routes/product.route.js";
+import AuthRoute from "./routes/auth.route.js";
 import { connectDataBase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
 
@@ -16,10 +17,11 @@ process.on("uncaughtException", (err) => {
 dotenv.config({ path: "api/config/config.env" });
 
 connectDataBase();
+app.use(express.json());
 
 app.use("/api/v1", ProductRoute);
+app.use("/api/v1", AuthRoute);
 
-app.use(express.json());
 app.use(errorMiddleware);
 
 const server = app.listen(process.env.PORT, () => {
