@@ -17,3 +17,19 @@ export const isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
 
   next();
 });
+
+//authorize user roles
+
+export const authorizeRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new ErrorHandler(
+          `Role: ${req.user.role} is not authorized to access this resource`,
+          403
+        )
+      );
+    }
+    next();
+  };
+};
