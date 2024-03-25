@@ -18,6 +18,14 @@ export default (err, req, res, next) => {
     error = new ErrorHandler(message, 400);
   }
 
+  // handle mongoose duplicate key error
+  if (err.code === 11000) {
+    const message = `${Object.keys(err.keyPattern)}: ${Object.values(
+      err.keyValue
+    )} already exist`;
+    error = new ErrorHandler(message, 400);
+  }
+
   res.status(error.statusCode).json({
     message: error.message,
     error: err,
