@@ -12,10 +12,7 @@ export default (user, statusCode, res) => {
     httpOnly: true,
   };
 
-  const { password, ...rest } = user._doc;
-
   res.status(statusCode).cookie("token", token, options).json({
     token,
-    user: rest,
   });
 };
