@@ -2,6 +2,9 @@ import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import User from "../models/user.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import sendToken from "../utils/sendToken.js";
+import { getResetPasswordTemplate } from "../utils/emailTemplates.js";
+import sendEmail from "../utils/sendEmail.js";
+import crypto from "crypto";
 
 // register user  => /api/v1/register
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -47,4 +50,79 @@ export const logoutUser = catchAsyncErrors(async (req, res, next) => {
   res.clearCookie("token").status(200).json({
     message: "logged out",
   });
+});
+
+//forgot password => /api/v1/password/forgot
+
+export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`user not found with email : ${req.body.email}`, 401)
+    );
+  }
+
+  //get reset password token
+
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save();
+
+  //create reset password url
+  const resetUrl = `${process.env.FRONTEND_URL}/api/v1/password/reset/${resetToken}`;
+
+  const message = getResetPasswordTemplate(user?.name, resetUrl);
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Foodi Password Recovery",
+      message,
+    });
+
+    res.status(200).json({
+      message: `Email sent to: ${user.email}`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+    return next(new ErrorHandler(error?.message, 500));
+  }
+});
+
+//reset password => /api/v1/password/reset/:token
+
+export const resetPassword = catchAsyncErrors(async (req, res, next) => {
+  //hash the URL Token
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`password reset token invalid or has been expired`, 400)
+    );
+  }
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler(`passwords does not match`, 400));
+  }
+
+  //set the new password
+  user.password = req.body.password;
+
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+
+  await user.save();
+
+  sendToken(user, 200, res);
 });
