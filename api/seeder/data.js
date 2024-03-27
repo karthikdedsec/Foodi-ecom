@@ -11,6 +11,7 @@ export default [
     ],
     category: "salad",
     price: 14.7,
+    stock: 50,
   },
   {
     name: "Haddock",
@@ -24,6 +25,7 @@ export default [
     ],
     category: "drinks",
     price: 14.7,
+    stock: 50,
   },
   {
     name: "Escalope de Veau",
@@ -37,6 +39,7 @@ export default [
     ],
     category: "popular",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Escalope de Veau",
@@ -50,6 +53,7 @@ export default [
     ],
     category: "dessert",
     price: 12.5,
+    stock: 50,
   },
   {
     name: "Roast Duck Breast",
@@ -63,6 +67,7 @@ export default [
     ],
     category: "popular",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Roast Duck Breast",
@@ -76,6 +81,7 @@ export default [
     ],
     category: "popular",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Roast Duck Breast",
@@ -89,6 +95,7 @@ export default [
     ],
     category: "popular",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Roast Duck Breast",
@@ -102,6 +109,7 @@ export default [
     ],
     category: "popular",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Escalope de Veau",
@@ -115,6 +123,7 @@ export default [
     ],
     category: "dessert",
     price: 12.5,
+    stock: 50,
   },
   {
     name: "Escalope de Veau",
@@ -128,6 +137,7 @@ export default [
     ],
     category: "pizza",
     price: 12.5,
+    stock: 50,
   },
   {
     name: "Breton Fish Stew",
@@ -141,6 +151,7 @@ export default [
     ],
     category: "pizza",
     price: 12.9,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -154,6 +165,7 @@ export default [
     ],
     category: "salad",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Escalope de Veau",
@@ -167,6 +179,7 @@ export default [
     ],
     category: "soup",
     price: 12.5,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -180,6 +193,7 @@ export default [
     ],
     category: "dessert",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Escalope de Veau",
@@ -193,6 +207,7 @@ export default [
     ],
     category: "dessert",
     price: 12.5,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -206,6 +221,7 @@ export default [
     ],
     category: "pizza",
     price: 9.5,
+    stock: 50,
   },
   {
     name: "Tuna Niçoise",
@@ -219,6 +235,7 @@ export default [
     ],
     category: "offered",
     price: 10.5,
+    stock: 50,
   },
   {
     name: "Roast Duck Breast",
@@ -232,6 +249,7 @@ export default [
     ],
     category: "dessert",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -245,6 +263,7 @@ export default [
     ],
     category: "salad",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -258,6 +277,7 @@ export default [
     ],
     category: "salad",
     price: 9.5,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -271,6 +291,7 @@ export default [
     ],
     category: "dessert",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -284,6 +305,7 @@ export default [
     ],
     category: "offered",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Roasted Pork Belly",
@@ -297,6 +319,7 @@ export default [
     ],
     category: "popular",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -310,6 +333,7 @@ export default [
     ],
     category: "salad",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Haddock",
@@ -323,6 +347,7 @@ export default [
     ],
     category: "drinks",
     price: 14.7,
+    stock: 50,
   },
   {
     name: "Roast Duck Breast",
@@ -336,6 +361,7 @@ export default [
     ],
     category: "offered",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -349,6 +375,7 @@ export default [
     ],
     category: "dessert",
     price: 9.5,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -362,7 +389,9 @@ export default [
     ],
     category: "soup",
     price: 13.5,
+    stock: 50,
   },
+
   {
     name: "Chicken and Walnut Salad",
     recipe:
@@ -375,6 +404,7 @@ export default [
     ],
     category: "dessert",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Escalope de Veau",
@@ -388,6 +418,7 @@ export default [
     ],
     category: "dessert",
     price: 12.5,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -401,6 +432,7 @@ export default [
     ],
     category: "salad",
     price: 9.5,
+    stock: 50,
   },
   {
     name: "Goats Cheese Pizza",
@@ -414,6 +446,7 @@ export default [
     ],
     category: "pizza",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -427,6 +460,7 @@ export default [
     ],
     category: "soup",
     price: 9.5,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -440,6 +474,7 @@ export default [
     ],
     category: "soup",
     price: 9.5,
+    stock: 50,
   },
   {
     name: "Haddock",
@@ -453,6 +488,7 @@ export default [
     ],
     category: "soup",
     price: 14.7,
+    stock: 50,
   },
   {
     name: "Haddock",
@@ -466,6 +502,7 @@ export default [
     ],
     category: "soup",
     price: 14.7,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -479,6 +516,7 @@ export default [
     ],
     category: "popular",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -492,6 +530,7 @@ export default [
     ],
     category: "dessert",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -505,6 +544,7 @@ export default [
     ],
     category: "dessert",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Haddock",
@@ -518,6 +558,7 @@ export default [
     ],
     category: "dessert",
     price: 14.7,
+    stock: 50,
   },
   {
     name: "Haddock",
@@ -531,6 +572,7 @@ export default [
     ],
     category: "pizza",
     price: 14.7,
+    stock: 50,
   },
   {
     name: "Roasted Pork Belly",
@@ -544,6 +586,7 @@ export default [
     ],
     category: "pizza",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -557,6 +600,7 @@ export default [
     ],
     category: "salad",
     price: 9.5,
+    stock: 50,
   },
   {
     name: "Tuna Niçoise",
@@ -570,6 +614,7 @@ export default [
     ],
     category: "dessert",
     price: 10.5,
+    stock: 50,
   },
   {
     name: "Tuna Niçoise",
@@ -583,6 +628,7 @@ export default [
     ],
     category: "pizza",
     price: 10.5,
+    stock: 50,
   },
   {
     name: "Chicken and Walnut Salad",
@@ -596,6 +642,7 @@ export default [
     ],
     category: "pizza",
     price: 13.5,
+    stock: 50,
   },
   {
     name: "Goats Cheese Pizza",
@@ -609,6 +656,7 @@ export default [
     ],
     category: "pizza",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -622,6 +670,7 @@ export default [
     ],
     category: "soup",
     price: 9.5,
+    stock: 50,
   },
   {
     name: "Breton Fish Stew",
@@ -635,7 +684,9 @@ export default [
     ],
     category: "pizza",
     price: 12.9,
+    stock: 50,
   },
+
   {
     name: "Goats Cheese Pizza",
     recipe:
@@ -648,6 +699,7 @@ export default [
     ],
     category: "pizza",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Roasted Pork Belly",
@@ -661,6 +713,7 @@ export default [
     ],
     category: "salad",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Haddock",
@@ -674,6 +727,7 @@ export default [
     ],
     category: "soup",
     price: 14.7,
+    stock: 50,
   },
   {
     name: "Breton Fish Stew",
@@ -687,6 +741,7 @@ export default [
     ],
     category: "pizza",
     price: 12.9,
+    stock: 50,
   },
   {
     name: "Escalope de Veau",
@@ -700,6 +755,7 @@ export default [
     ],
     category: "offered",
     price: 12.5,
+    stock: 50,
   },
   {
     name: "Escalope de Veau",
@@ -713,6 +769,7 @@ export default [
     ],
     category: "dessert",
     price: 12.5,
+    stock: 50,
   },
   {
     name: "Breton Fish Stew",
@@ -726,6 +783,7 @@ export default [
     ],
     category: "pizza",
     price: 12.9,
+    stock: 50,
   },
   {
     name: "Goats Cheese Pizza",
@@ -739,6 +797,7 @@ export default [
     ],
     category: "salad",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Fish Parmentier",
@@ -752,6 +811,7 @@ export default [
     ],
     category: "soup",
     price: 9.5,
+    stock: 50,
   },
   {
     name: "Roast Duck Breast",
@@ -765,6 +825,7 @@ export default [
     ],
     category: "soup",
     price: 14.5,
+    stock: 50,
   },
   {
     name: "Tuna Niçoise",
@@ -778,5 +839,6 @@ export default [
     ],
     category: "soup",
     price: 10.5,
+    stock: 50,
   },
 ];

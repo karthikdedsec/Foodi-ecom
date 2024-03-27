@@ -36,6 +36,10 @@ const productSchema = new mongoose.Schema(
       required: [true, "Please enter product price"],
       maxLength: [100, "product price cannot exceed 100 digits"],
     },
+    stock: {
+      type: Number,
+      required: [true, "Please enter product stock"],
+    },
 
     numOfReviews: {
       type: Number,
