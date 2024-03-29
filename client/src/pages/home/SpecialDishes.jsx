@@ -5,8 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useEffect, useRef, useState } from "react";
 import Cards from "../../components/Cards";
+import { useGetProductsQuery } from "../../redux/api/productsApi";
 
-const simpleNextArrow = (props) => {
+const SimpleNextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div
@@ -19,7 +20,7 @@ const simpleNextArrow = (props) => {
   );
 };
 
-const simplePrevArrow = (props) => {
+const SimplePrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div
@@ -36,14 +37,19 @@ const SpecialDishes = () => {
   const [recipes, setRecipes] = useState([]);
   const slider = useRef(null);
 
+  const { data: dataSet, isLoading } = useGetProductsQuery();
+
   useEffect(() => {
-    fetch("/menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const specials = data.filter((item) => item.category === "popular");
-        setRecipes(specials);
-      });
-  }, []);
+    // fetch("/menu.json")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     const specials = data.filter((item) => item.category === "popular");
+    //     setRecipes(specials);
+    //   });
+    setRecipes(
+      dataSet?.products?.filter((item) => item.category === "popular")
+    );
+  }, [dataSet]);
 
   //   console.log(recipes);
 
@@ -81,8 +87,8 @@ const SpecialDishes = () => {
         },
       },
     ],
-    nextArrow: <simpleNextArrow />,
-    prevArrow: <simplePrevArrow />,
+    nextArrow: <SimpleNextArrow />,
+    prevArrow: <SimplePrevArrow />,
   };
   return (
     <div className="section-container my-20 relative bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
@@ -112,7 +118,7 @@ const SpecialDishes = () => {
         {...settings}
         className="overflow-hidden mt-10 space-x-2 "
       >
-        {recipes.map((recipe) => (
+        {recipes?.map((recipe) => (
           <Cards key={recipe._id} recipes={recipe} />
         ))}
       </Slider>

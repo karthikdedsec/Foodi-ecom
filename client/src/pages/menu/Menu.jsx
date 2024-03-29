@@ -1,6 +1,8 @@
 import { FaFilter } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Cards from "../../components/Cards";
+import { useGetProductsQuery } from "../../redux/api/productsApi";
+import Loader from "../../components/Loader";
 
 const Menu = () => {
   const [menu, setMenu] = useState([]);
@@ -9,29 +11,40 @@ const Menu = () => {
   const [sortOption, setSortOption] = useState("default");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(9);
+
+  const { data: dataSet, isLoading } = useGetProductsQuery();
+
+  // console.log(dataSet);
   // loading data
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/menu.json");
-        const data = await res.json();
-        setMenu(data);
-        setFilteredItems(data);
-      } catch (error) {
-        console.log("error fetching data");
-      }
-    };
+    // const fetchData = async () => {
+    //   try {
+    //     const res = await fetch("/api/v1/products");
+    //     const data = await res.json();
+    //     setMenu(data.products);
+    //     setFilteredItems(data.products);
+    //   } catch (error) {
+    //     console.log("error fetching data");
+    //   }
+    // };
 
-    fetchData();
-  }, []);
+    // fetchData();
+
+    setMenu(dataSet !== undefined ? dataSet.products : null);
+    setFilteredItems(dataSet !== undefined ? dataSet.products : null);
+  }, [dataSet]);
 
   //   filtering data based on category
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const filterItems = (category) => {
     const filter =
       category === "all"
         ? menu
-        : menu.filter((item) => item.category === category);
+        : menu?.filter((item) => item.category === category);
 
     setFilteredItems(filter);
     setSelectedCategory(category);
@@ -77,7 +90,7 @@ const Menu = () => {
   //pagination logic;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredItems?.slice(indexOfFirstItem, indexOfLastItem);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -167,7 +180,7 @@ const Menu = () => {
         </div>
         {/* products card*/}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-6">
-          {currentItems.map((item) => (
+          {currentItems?.map((item) => (
             <Cards key={item._id} recipes={item} />
           ))}
         </div>
@@ -175,7 +188,7 @@ const Menu = () => {
       {/* pagination section */}
       <div className="flex justify-center my-8">
         {Array.from({
-          length: Math.ceil(filteredItems.length / itemsPerPage),
+          length: Math.ceil(filteredItems?.length / itemsPerPage),
         }).map((_, index) => (
           <button
             key={index + 1}

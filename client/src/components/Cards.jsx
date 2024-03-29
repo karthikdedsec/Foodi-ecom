@@ -23,7 +23,7 @@ const Cards = ({ recipes }) => {
         <Link to={`/menu/${recipes._id}`}>
           <figure>
             <img
-              src={recipes.image}
+              src={recipes.image[0].url}
               alt="image"
               className="hover:scale-105 transition-all duration-200 md:h-72"
             />

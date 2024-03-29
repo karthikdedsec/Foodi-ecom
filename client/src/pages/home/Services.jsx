@@ -12,13 +12,13 @@ const serviceLists = [
     image: "/images/home/services/icon2.png",
   },
   {
-    id: 1,
+    id: 3,
     title: "Online Ordering",
     des: "Explore menu & order with ease using our Online Ordering ",
     image: "/images/home/services/icon3.png",
   },
   {
-    id: 1,
+    id: 4,
     title: "Gift Cards",
     des: "Give the gift of exceptional dining with Foodi Gift Cards",
     image: "/images/home/services/icon4.png",
