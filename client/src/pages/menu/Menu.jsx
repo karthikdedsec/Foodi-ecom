@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Cards from "../../components/Cards";
 import { useGetProductsQuery } from "../../redux/api/productsApi";
 import Loader from "../../components/Loader";
+import toast from "react-hot-toast";
 
 const Menu = () => {
   const [menu, setMenu] = useState([]);
@@ -12,27 +13,18 @@ const Menu = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(9);
 
-  const { data: dataSet, isLoading } = useGetProductsQuery();
+  const { data: dataSet, isLoading, error, isError } = useGetProductsQuery();
 
   // console.log(dataSet);
   // loading data
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const res = await fetch("/api/v1/products");
-    //     const data = await res.json();
-    //     setMenu(data.products);
-    //     setFilteredItems(data.products);
-    //   } catch (error) {
-    //     console.log("error fetching data");
-    //   }
-    // };
-
-    // fetchData();
+    if (isError) {
+      toast.error(error?.data?.message);
+    }
 
     setMenu(dataSet !== undefined ? dataSet.products : null);
     setFilteredItems(dataSet !== undefined ? dataSet.products : null);
-  }, [dataSet]);
+  }, [dataSet, isError]);
 
   //   filtering data based on category
 
