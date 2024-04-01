@@ -36,12 +36,12 @@ const MenuItem = () => {
     <div className="min-h-screen ">
       {/* menu banner */}
       <div className="max-w-screen-xl container mx-auto xl:px-24 px-4 bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
-        <div className=" mx-auto py-24">
+        <div className=" mx-auto pt-32">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="md:flex flex-row-reverse md:items-center">
               <div className="mx-auto">
                 <img
-                  className="w-full md:max-w-lg mx-auto"
+                  className="w-fit md:max-w-lg mx-auto"
                   src={activeImg}
                   alt="Product Image"
                 />

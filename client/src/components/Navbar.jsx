@@ -1,10 +1,14 @@
-import { BiPhoneCall } from "react-icons/bi";
+import { BsFillPersonFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { useEffect, useState } from "react";
+import { useGetUserQuery } from "../redux/api/userApi";
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
+
+  const { data } = useGetUserQuery();
+  console.log(data);
 
   //handle scroll functions
   useEffect(() => {
@@ -151,10 +155,14 @@ const Navbar = () => {
           </div>
 
           {/* btn */}
-          <a className="btn bg-bGreen text-white rounded-full flex items-center px-6">
-            <BiPhoneCall className="text-lg" />
-            <span className="font-Poppins font-medium">Contact</span>
-          </a>
+          <Link
+            to="/login"
+            className="btn bg-bGreen text-white rounded-full flex items-center px-6"
+          >
+            {/* <BiPhoneCall className="text-lg" /> */}
+            <BsFillPersonFill className="text-lg" />
+            <span className="font-Poppins font-medium">Login</span>
+          </Link>
         </div>
       </div>
     </header>
