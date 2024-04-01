@@ -1,16 +1,17 @@
 import { AiFillGithub } from "react-icons/ai";
 import { BsGoogle } from "react-icons/bs";
 import { CgFacebook } from "react-icons/cg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../redux/api/authApi";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import OAuth from "../components/OAuth";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const [register, { isLoading, error, data }] = useRegisterMutation();
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const Signup = () => {
       password,
     };
     register(signUpData);
+    navigate("/login");
   };
 
   console.log(data);
@@ -46,7 +48,7 @@ const Signup = () => {
               <input
                 type="text"
                 placeholder="Type Here"
-                className="border border-gray-200 p-6 text-sm rounded-md"
+                className="border border-gray-200 p-3 text-sm rounded-md"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -56,7 +58,7 @@ const Signup = () => {
               <input
                 type="email"
                 placeholder="Type Here"
-                className="border border-gray-200 p-6 text-sm rounded-md"
+                className="border border-gray-200 p-3 text-sm rounded-md"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -68,14 +70,14 @@ const Signup = () => {
               <input
                 type="password"
                 placeholder="Enter Your Password"
-                className="border border-gray-200 p-6 text-sm rounded-md"
+                className="border border-gray-200 p-3 text-sm rounded-md"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
             <button
               type="submit"
-              className="font-Poppins font-medium p-6 bg-[#39DB4A] text-white text-center mt-8 rounded-md"
+              className="font-Poppins font-medium p-3 bg-[#39DB4A] text-white text-center mt-8 rounded-md"
               disabled={isLoading}
             >
               Sign Up
@@ -87,26 +89,7 @@ const Signup = () => {
               </Link>
             </div>
             <p className="text-center">Or sign in with</p>
-            <div className="flex justify-center items-center gap-11">
-              <button
-                type="button"
-                className="bg-gray-200 p-4 rounded-full border-green-500 border-2"
-              >
-                <BsGoogle className="text-base" />
-              </button>
-              <button
-                type="button"
-                className="bg-gray-200 p-3 rounded-full border-green-500 border-2"
-              >
-                <CgFacebook className="text-2xl" />
-              </button>
-              <button
-                type="button"
-                className="bg-gray-200 p-3 rounded-full border-green-500 border-2"
-              >
-                <AiFillGithub className="text-2xl" />
-              </button>
-            </div>
+            <OAuth />
           </form>
         </div>
       </div>

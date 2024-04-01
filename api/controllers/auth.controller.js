@@ -45,6 +45,30 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
+//google login
+
+export const googleLogin = catchAsyncErrors(async (req, res, next) => {
+  const { name, email, avatar } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (user) {
+    sendToken(user, 200, res);
+  } else {
+    const generatedPassword =
+      Math.random().toString(36).slice(-8) +
+      Math.random().toString(36).slice(-8);
+
+    const newUser = await User.create({
+      name,
+      email,
+      password: generatedPassword,
+      avatar,
+    });
+    sendToken(newUser, 201, res);
+  }
+});
+
 // logout user  => /api/v1/logout
 export const logoutUser = catchAsyncErrors(async (req, res, next) => {
   res.clearCookie("token").status(200).json({

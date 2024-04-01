@@ -31,6 +31,23 @@ export const authApi = createApi({
         };
       },
     }),
+    googleRegister: builder.mutation({
+      query(body) {
+        return {
+          url: "/google",
+          method: "POST",
+          body,
+        };
+      },
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          await dispatch(userApi.endpoints.getUser.initiate(null));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
     logOut: builder.query({
       query: () => ({
         url: "/logout",
@@ -39,5 +56,9 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLazyLogOutQuery } =
-  authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useLazyLogOutQuery,
+  useGoogleRegisterMutation,
+} = authApi;

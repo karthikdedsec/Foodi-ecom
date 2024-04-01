@@ -1,11 +1,9 @@
-import { AiFillGithub } from "react-icons/ai";
-import { CgFacebook } from "react-icons/cg";
-import { BsGoogle } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLoginMutation } from "../redux/api/authApi";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import OAuth from "../components/OAuth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -43,13 +41,13 @@ const Login = () => {
           <h2 className="text-center text-2xl font-bold text-[#151515] py-6">
             Login
           </h2>
-          <form onSubmit={handleLogin} className="flex flex-col gap-4 pb-20">
+          <form onSubmit={handleLogin} className="flex flex-col gap-4 mb-20">
             <label className="flex flex-col gap-4">
               <span className="text-[#444] text-base font-semibold">Email</span>
               <input
                 type="email"
                 placeholder="Type Here"
-                className="border border-gray-200 p-6 text-sm rounded-md"
+                className="border border-gray-200 p-3 text-sm rounded-md"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -61,14 +59,14 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="Enter Your Password"
-                className="border border-gray-200 p-6 text-sm rounded-md"
+                className="border border-gray-200 p-3 text-sm rounded-md"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
             <button
               type="submit"
-              className="font-Poppins font-medium p-6 bg-[#39DB4A] text-white text-center mt-8 rounded-md"
+              className="font-Poppins font-medium p-3 bg-[#39DB4A] text-white text-center mt-8 rounded-md"
               disabled={isLoading}
             >
               Sign in
@@ -80,26 +78,7 @@ const Login = () => {
               </Link>
             </div>
             <p className="text-center">Or sign in with</p>
-            <div className="flex justify-center items-center gap-11">
-              <button
-                type="button"
-                className="bg-gray-200 p-4 rounded-full border-green-500 border-2"
-              >
-                <BsGoogle className="text-base" />
-              </button>
-              <button
-                type="button"
-                className="bg-gray-200 p-3 rounded-full border-green-500 border-2"
-              >
-                <CgFacebook className="text-2xl" />
-              </button>
-              <button
-                type="button"
-                className="bg-gray-200 p-3 rounded-full border-green-500 border-2"
-              >
-                <AiFillGithub className="text-2xl" />
-              </button>
-            </div>
+            <OAuth />
           </form>
         </div>
       </div>
