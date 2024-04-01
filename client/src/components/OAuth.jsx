@@ -5,12 +5,19 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "../firebase";
 import { useGoogleRegisterMutation } from "../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const OAuth = () => {
   const [googleRegister, { isLoading, error, data }] =
     useGoogleRegisterMutation();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading) {
+      navigate("/");
+    }
+  }, [isLoading]);
 
   const auth = getAuth(app);
   const handleGoogleClick = async () => {
@@ -27,7 +34,6 @@ const OAuth = () => {
         },
       };
       googleRegister(googleData);
-      navigate("/");
     } catch (error) {
       console.log(error);
     }
