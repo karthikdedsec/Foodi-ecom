@@ -1,14 +1,20 @@
 import { BsFillPersonFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { useEffect, useState } from "react";
 import { useGetUserQuery } from "../redux/api/userApi";
+import { useSelector } from "react-redux";
+import { useLazyLogOutQuery } from "../redux/api/authApi";
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
 
-  const { data } = useGetUserQuery();
-  console.log(data);
+  const navigate = useNavigate();
+  const { isLoading } = useGetUserQuery();
+  const [logOut] = useLazyLogOutQuery();
+
+  const { user } = useSelector((state) => state.auth);
+  // console.log(data);
 
   //handle scroll functions
   useEffect(() => {
@@ -69,6 +75,11 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const logoutHandler = () => {
+    logOut();
+    navigate(0);
+  };
 
   return (
     <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-400 ease-in-out z-40">
@@ -154,15 +165,57 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* btn */}
-          <Link
-            to="/login"
-            className="btn bg-bGreen text-white rounded-full flex items-center px-6"
-          >
-            {/* <BiPhoneCall className="text-lg" /> */}
-            <BsFillPersonFill className="text-lg" />
-            <span className="font-Poppins font-medium">Login</span>
-          </Link>
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className=" m-1 border-bGreen rounded-full border-2 overflow-hidden w-9 h-9"
+              >
+                <img
+                  src={
+                    user?.avatar
+                      ? user?.avatar?.url
+                      : "https://th.bing.com/th/id/OIP.4nSiPjYiNOlvj6KJiw2UTAAAAA?rs=1&pid=ImgDetMain"
+                  }
+                  alt="avatar"
+                  className="object-cover"
+                />
+              </div>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <p className="text-sm">@{user?.name}</p>
+                {user?.role === "admin" ? (
+                  <li>
+                    <Link to="/admin/dashboard">Dashboard</Link>
+                  </li>
+                ) : (
+                  ""
+                )}
+
+                <li>
+                  <Link to="/me/orders">Orders</Link>
+                </li>
+                <li>
+                  <Link to="/me/profile">Profile</Link>
+                </li>
+                <li className="text-red-600" onClick={logoutHandler}>
+                  <Link to="/">Logout</Link>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="btn bg-bGreen text-white rounded-full flex items-center px-6"
+            >
+              {/* <BiPhoneCall className="text-lg" /> */}
+              <BsFillPersonFill className="text-lg" />
+              <span className="font-Poppins font-medium">Login</span>
+            </Link>
+          )}
         </div>
       </div>
     </header>

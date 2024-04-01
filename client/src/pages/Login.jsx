@@ -5,20 +5,26 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLoginMutation } from "../redux/api/authApi";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [login, { isLoading, error, data }] = useLoginMutation();
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   // console.log(data);
 
   useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+
     if (error) {
       toast.error(error?.data?.message);
     }
-  }, [error]);
+  }, [error, isAuthenticated]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -27,7 +33,6 @@ const Login = () => {
       password,
     };
     login(loginData);
-    navigate("/");
   };
 
   return (
