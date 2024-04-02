@@ -1,7 +1,12 @@
 import { AiFillGithub } from "react-icons/ai";
 import { CgFacebook } from "react-icons/cg";
 import { BsGoogle } from "react-icons/bs";
-import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  getAuth,
+  GithubAuthProvider,
+} from "firebase/auth";
 import { app } from "../firebase";
 import { useGoogleRegisterMutation } from "../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
@@ -13,13 +18,8 @@ const OAuth = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isLoading) {
-      navigate("/");
-    }
-  }, [isLoading]);
-
   const auth = getAuth(app);
+  // google
   const handleGoogleClick = async () => {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
@@ -34,6 +34,19 @@ const OAuth = () => {
         },
       };
       googleRegister(googleData);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //github
+  const handleGithubClick = async () => {
+    const provider = new GithubAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+    try {
+      const resultsFromGitHub = await signInWithPopup(auth, provider);
+      console.log(resultsFromGitHub);
     } catch (error) {
       console.log(error);
     }
@@ -58,7 +71,7 @@ const OAuth = () => {
         type="button"
         className="bg-gray-200 p-3 rounded-full border-green-500 border-2"
       >
-        <AiFillGithub className="text-2xl" />
+        <AiFillGithub className="text-2xl" onClick={handleGithubClick} />
       </button>
     </div>
   );

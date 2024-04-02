@@ -1,6 +1,3 @@
-import { AiFillGithub } from "react-icons/ai";
-import { BsGoogle } from "react-icons/bs";
-import { CgFacebook } from "react-icons/cg";
 import { Link, useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../redux/api/authApi";
 import { useEffect, useState } from "react";
