@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./components/user/Profile";
 import UpdateProfile from "./components/user/UpdateProfile";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   return (
@@ -23,8 +24,23 @@ function App() {
           <Route path="/menu/:id" element={<MenuItem />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<Signup />} />
-          <Route path="/me/profile" element={<Profile />} />
-          <Route path="/me/update_profile" element={<UpdateProfile />} />
+
+          <Route
+            path="/me/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/me/update_profile"
+            element={
+              <ProtectedRoute>
+                <UpdateProfile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </div>
