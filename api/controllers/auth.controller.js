@@ -5,6 +5,7 @@ import sendToken from "../utils/sendToken.js";
 import { getResetPasswordTemplate } from "../utils/emailTemplates.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
+import { delete_file, upload_file } from "../utils/cloudinary.js";
 
 // register user  => /api/v1/register
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -76,8 +77,24 @@ export const logoutUser = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-//forgot password => /api/v1/password/forgot
+// upload user avatar => /api/v1/me/upload_avatar
+export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
+  const avatarResponse = await upload_file(req.body.avatar, "foodi/avatars");
 
+  //remover previous avatar
+  if (req?.user?.avatar?.url) {
+    await delete_file(req?.user?.avatar?.public_id);
+  }
+  const user = await User.findByIdAndUpdate(req?.user?._id, {
+    avatar: avatarResponse,
+  });
+
+  res.status(200).json({
+    user,
+  });
+});
+
+//forgot password => /api/v1/password/forgot
 export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
