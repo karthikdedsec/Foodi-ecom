@@ -202,7 +202,7 @@ const Navbar = () => {
                   <Link to="/me/profile">Profile</Link>
                 </li>
                 <li className="text-red-600" onClick={logoutHandler}>
-                  <Link to="/">Logout</Link>
+                  <span>Logout</span>
                 </li>
               </ul>
             </div>
