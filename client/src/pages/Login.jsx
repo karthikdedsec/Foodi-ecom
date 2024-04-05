@@ -63,10 +63,16 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <Link
+                to="/forgotPassword"
+                className="flex justify-end text-sm font-medium text-[#656565]"
+              >
+                Forgot password?
+              </Link>
             </label>
             <button
               type="submit"
-              className="font-Poppins font-medium p-3 bg-[#39DB4A] text-white text-center mt-8 rounded-md"
+              className="font-Poppins font-medium p-3 bg-[#39DB4A] text-white text-center mt-5 rounded-md"
               disabled={isLoading}
             >
               Sign in
