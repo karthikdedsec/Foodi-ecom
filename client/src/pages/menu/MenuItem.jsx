@@ -4,9 +4,13 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import Loader from "../../components/Loader";
 import StarRatings from "react-star-ratings";
+import { useDispatch } from "react-redux";
+import { setCartItem } from "../../redux/features/cartSlice";
 
 const MenuItem = () => {
   const params = useParams();
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
 
   const { data, isLoading, error, isError } = useGetProductDetailsQuery(
     params.id
@@ -27,6 +31,41 @@ const MenuItem = () => {
       toast.error(error?.data?.message);
     }
   }, [isError]);
+
+  const increaseQty = () => {
+    const count = document.querySelector(".count");
+
+    if (count.valueAsNumber >= product?.stock) {
+      return;
+    } else {
+      const qty = count.valueAsNumber + 1;
+      setQuantity(qty);
+    }
+  };
+
+  const decreaseQty = () => {
+    const count = document.querySelector(".count");
+
+    if (count.valueAsNumber <= 1) {
+      return;
+    } else {
+      const qty = count.valueAsNumber - 1;
+      setQuantity(qty);
+    }
+  };
+
+  const setItemToCart = () => {
+    const cartItem = {
+      product: product?._id,
+      name: product?.name,
+      price: product?.price,
+      image: product?.image[0]?.url,
+      stock: product?.stock,
+      quantity,
+    };
+    dispatch(setCartItem(cartItem));
+    toast.success("Item added to cart");
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -92,16 +131,22 @@ const MenuItem = () => {
                 ${product?.price}
               </p>
               <div className="flex gap-2 mb-4">
-                <span className="btn btn-danger rounded-full w-12 h-12 minus">
+                <span
+                  className="btn btn-danger rounded-full w-12 h-12 minus"
+                  onClick={decreaseQty}
+                >
                   -
                 </span>
                 <input
                   type="number"
-                  className="form-input w-10 text-center"
-                  value="1"
+                  className="form-input count w-10 text-center"
+                  value={quantity}
                   readOnly
                 />
-                <span className="btn text-white bg-green-500 rounded-full w-12 h-12 plus">
+                <span
+                  className="btn text-white bg-green-500 rounded-full w-12 h-12 plus"
+                  onClick={increaseQty}
+                >
                   +
                 </span>
               </div>
@@ -109,7 +154,8 @@ const MenuItem = () => {
                 type="button"
                 id="cart_btn"
                 className="bg-[#39DB4A] font-Poppins font-medium text-white px-6 py-3 rounded-full mb-4 hover:cursor-pointer shadow-lg"
-                disabled
+                disabled={product?.stock === 0}
+                onClick={setItemToCart}
               >
                 Add to Cart
               </button>

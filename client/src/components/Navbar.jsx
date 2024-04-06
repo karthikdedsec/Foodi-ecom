@@ -14,6 +14,7 @@ const Navbar = () => {
   const [logOut] = useLazyLogOutQuery();
 
   const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
   // console.log(data);
 
   //handle scroll functions
@@ -81,6 +82,9 @@ const Navbar = () => {
     navigate(0);
   };
 
+  const cartButton = () => {
+    navigate("/cart");
+  };
   return (
     <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-400 ease-in-out z-40">
       <div
@@ -161,7 +165,13 @@ const Navbar = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-sm indicator-item">8</span>
+              <button
+                onClick={cartButton}
+                to="/cart"
+                className="badge badge-sm indicator-item"
+              >
+                {cartItems?.length}
+              </button>
             </div>
           </div>
 

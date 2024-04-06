@@ -12,14 +12,14 @@ const Cards = ({ recipes }) => {
   return (
     <div>
       <div className="card card-compact  bg-base-100 shadow-xl relative ">
-        <div
-          className={`rating gap-1 absolute right-0 top-0 p-4 heartStar bg-bGreen ${
+        {/* <div
+          className={`rating gap-1 absolute top-0 left-0 p-4 heartStar bg-bGreen ${
             isLiked ? "!text-rose-500" : "!text-white"
           }`}
           onClick={handleHeartClick}
         >
           <AiFillHeart className="h-5 w-5 cursor-pointer" />
-        </div>
+        </div> */}
         <Link to={`/menu/${recipes._id}`}>
           <figure>
             <img
