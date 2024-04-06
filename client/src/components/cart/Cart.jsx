@@ -7,8 +7,8 @@ const Cart = () => {
   // Calculate total price
   const totalPrice = cartItems?.reduce((acc, item) => acc + item.price, 0);
   return (
-    <div className="min-h-screen mt-3 flex justify-center items-center">
-      <div className="max-w-screen-xl flex flex-col sm:flex-row justify-between items-center gap-8  container mx-auto xl:px-24 px-4 bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
+    <div className="min-h-screen flex justify-center items-center">
+      <div className="max-w-screen-xl py-11 flex flex-col md:flex-row justify-between flex-nowrap items-center gap-8  container mx-auto xl:px-24 px-4 bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
         <div className=" container mx-auto mt-8 flex-1">
           <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
           {cartItems?.length === 0 ? (
@@ -18,7 +18,7 @@ const Cart = () => {
               {cartItems?.map((item) => (
                 <div
                   key={item?.product}
-                  className="flex items-center justify-between border-b border-gray-200 py-2"
+                  className="flex items-center justify-around border-b border-gray-200 py-2"
                 >
                   <div className="flex items-center space-x-7">
                     <img
@@ -44,10 +44,12 @@ const Cart = () => {
                         +
                       </span>
                     </div>
+                    <div>
+                      <button className="text-red-500 pl-5">
+                        <HiTrash className="text-xl" />
+                      </button>
+                    </div>
                   </div>
-                  <button className="text-red-500 pl-5">
-                    <HiTrash className="text-xl" />
-                  </button>
                 </div>
               ))}
               <div className="mt-4">
@@ -58,7 +60,7 @@ const Cart = () => {
             </div>
           )}
         </div>
-        <div className="w-full sm:w-auto">
+        <div className="w-full lg:w-2/4 md:w-1/4">
           <div className="bg-gray-100 p-9 rounded-lg ">
             <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
             <div className="flex justify-between">
