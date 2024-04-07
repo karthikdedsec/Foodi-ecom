@@ -4,6 +4,9 @@ const initialState = {
   cartItems: localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [],
+  deliveryInfo: localStorage.getItem("deliveryInfo")
+    ? JSON.parse(localStorage.getItem("deliveryInfo"))
+    : {},
 };
 
 export const cartSlice = createSlice({
@@ -27,9 +30,21 @@ export const cartSlice = createSlice({
 
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
+    removeCartItem: (state, action) => {
+      state.cartItems = state.cartItems.filter(
+        (i) => i.product !== action.payload
+      );
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    saveDeliveryInfo: (state, action) => {
+      state.deliveryInfo = action.payload;
+
+      localStorage.setItem("deliveryInfo", JSON.stringify(state.deliveryInfo));
+    },
   },
 });
 
 export default cartSlice.reducer;
 
-export const { setCartItem } = cartSlice.actions;
+export const { setCartItem, removeCartItem, saveDeliveryInfo } =
+  cartSlice.actions;

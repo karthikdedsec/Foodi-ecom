@@ -16,6 +16,7 @@ import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Cart from "./components/cart/Cart";
+import Shipping from "./components/cart/Shipping";
 
 function App() {
   return (
@@ -63,8 +64,17 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/password/reset/:token" element={<ResetPassword />} />
+          <Route
+            path="/shipping"
+            element={
+              <ProtectedRoute>
+                <Shipping />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </div>
