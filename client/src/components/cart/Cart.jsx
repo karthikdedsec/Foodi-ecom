@@ -56,9 +56,11 @@ const Cart = () => {
     <div className="min-h-screen flex justify-center items-center">
       <div className="max-w-screen-xl py-11 flex flex-col md:flex-row justify-between flex-nowrap items-center gap-8  container mx-auto xl:px-24 px-4 bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
         <div className=" container mx-auto mt-8 flex-1">
-          <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
+          {cartItems?.length !== 0 && (
+            <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
+          )}
           {cartItems?.length === 0 ? (
-            <p>Your cart is empty</p>
+            <p className="text-center">Your cart is empty</p>
           ) : (
             <div>
               {cartItems?.map((item) => (
@@ -110,38 +112,40 @@ const Cart = () => {
             </div>
           )}
         </div>
-        <div className="w-full lg:w-2/4 md:w-1/4">
-          <div className="bg-gray-100 p-9 rounded-lg ">
-            <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
-            <div className="flex justify-between">
-              <span>quantity:</span>
-              <span>
-                {cartItems?.reduce((acc, item) => acc + item?.quantity, 0)}
-              </span>
-            </div>
-            <div className="flex justify-between mt-2"></div>
-            <div className="border-t flex flex-col border-gray-200 mt-4 pt-4">
+        {cartItems?.length !== 0 && (
+          <div className="w-full lg:w-2/4 md:w-1/4">
+            <div className="bg-gray-100 p-9 rounded-lg ">
+              <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
               <div className="flex justify-between">
-                <span className="font-semibold">Est Total:</span>
-                <span className="font-semibold">
-                  $
-                  {cartItems
-                    ?.reduce(
-                      (acc, item) => acc + item?.quantity * item?.price,
-                      0
-                    )
-                    .toFixed(2)}
+                <span>quantity:</span>
+                <span>
+                  {cartItems?.reduce((acc, item) => acc + item?.quantity, 0)}
                 </span>
               </div>
-              <button
-                onClick={handleCheckout}
-                className="bg-bGreen p-4 rounded-lg text-white text-center mt-8"
-              >
-                Check out
-              </button>
+              <div className="flex justify-between mt-2"></div>
+              <div className="border-t flex flex-col border-gray-200 mt-4 pt-4">
+                <div className="flex justify-between">
+                  <span className="font-semibold">Est Total:</span>
+                  <span className="font-semibold">
+                    $
+                    {cartItems
+                      ?.reduce(
+                        (acc, item) => acc + item?.quantity * item?.price,
+                        0
+                      )
+                      .toFixed(2)}
+                  </span>
+                </div>
+                <button
+                  onClick={handleCheckout}
+                  className="bg-bGreen p-4 rounded-lg text-white text-center mt-8"
+                >
+                  Check out
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

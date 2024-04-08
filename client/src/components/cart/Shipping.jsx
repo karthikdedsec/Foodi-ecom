@@ -3,10 +3,12 @@ import { countries } from "countries-list";
 import { useDispatch } from "react-redux";
 import { saveDeliveryInfo } from "../../redux/features/cartSlice";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Shipping = () => {
   const countriesList = Object.values(countries);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -38,6 +40,7 @@ const Shipping = () => {
         country,
       })
     );
+    navigate("/confirm");
   };
 
   return (
@@ -143,7 +146,7 @@ const Shipping = () => {
               {/* Similarly, add other input fields for city, phoneNo, postalCode, and country */}
               <button
                 type="submit"
-                className="bg-bGreen text-white py-2 px-4 rounded w-full mt-4 shadow-lg"
+                className="bg-bGreen btn text-white py-2 px-4 rounded w-full mt-4 shadow-lg"
               >
                 CONTINUE
               </button>
