@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import ProductRoute from "./routes/product.route.js";
 import AuthRoute from "./routes/auth.route.js";
 import OrderRoute from "./routes/order.route.js";
+import PaymentRoute from "./routes/payment.route.js";
 import { connectDataBase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
 import cookieParser from "cookie-parser";
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use("/api/v1", ProductRoute);
 app.use("/api/v1", AuthRoute);
 app.use("/api/v1", OrderRoute);
+app.use("/api/v1", PaymentRoute);
 
 app.use(errorMiddleware);
 

@@ -115,37 +115,37 @@ const Menu = () => {
           <div className="flex flex-row justify-start md:items-center md:gap-8 gap-4 flex-wrap py-6 font-semibold">
             <button
               onClick={showAll}
-              className={selectedCategory === "all" ? "active" : ""}
+              className={selectedCategory === "all" ? "activeL" : ""}
             >
               All
             </button>
             <button
               onClick={() => filterItems("salad")}
-              className={selectedCategory === "salad" ? "active" : ""}
+              className={selectedCategory === "salad" ? "activeL" : ""}
             >
               Salad
             </button>
             <button
               onClick={() => filterItems("pizza")}
-              className={selectedCategory === "pizza" ? "active" : ""}
+              className={selectedCategory === "pizza" ? "activeL" : ""}
             >
               pizza
             </button>
             <button
               onClick={() => filterItems("soup")}
-              className={selectedCategory === "soup" ? "active" : ""}
+              className={selectedCategory === "soup" ? "activeL" : ""}
             >
               Soups
             </button>
             <button
               onClick={() => filterItems("dessert")}
-              className={selectedCategory === "dessert" ? "active" : ""}
+              className={selectedCategory === "dessert" ? "activeL" : ""}
             >
               Desserts
             </button>
             <button
               onClick={() => filterItems("drinks")}
-              className={selectedCategory === "drinks" ? "active" : ""}
+              className={selectedCategory === "drinks" ? "activeL" : ""}
             >
               Drinks
             </button>

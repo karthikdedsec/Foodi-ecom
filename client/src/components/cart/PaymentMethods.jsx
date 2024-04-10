@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { calculateOrderCost } from "../../helpers/helpers";
-import { useCreateNewOrderMutation } from "../../redux/api/orderApi";
+import {
+  useCreateNewOrderMutation,
+  useStripeCheckoutSessionMutation,
+} from "../../redux/api/orderApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +17,17 @@ const PaymentMethods = () => {
 
   const [createNewOrder, { isLoading, error, isSuccess }] =
     useCreateNewOrderMutation();
+
+  const [
+    stripeCheckoutSession,
+    { data: checkOutData, isLoading: stripeLoading },
+  ] = useStripeCheckoutSessionMutation();
+
+  useEffect(() => {
+    if (checkOutData) {
+      window.location.href = checkOutData?.url;
+    }
+  }, [checkOutData]);
 
   useEffect(() => {
     if (error) {
@@ -48,6 +62,16 @@ const PaymentMethods = () => {
     }
     if (method === "Card") {
       //stripe checkout
+      const orderData = {
+        deliveryInfo,
+        orderItems: cartItems,
+        itemsPrice,
+        deliveryFee,
+        taxAmount,
+        totalAmount: totalPrice,
+      };
+
+      stripeCheckoutSession(orderData);
     }
   };
 
@@ -94,7 +118,7 @@ const PaymentMethods = () => {
                   id="shipping_btn"
                   type="submit"
                   className="btn py-2 w-full mt-4 bg-bGreen text-white"
-                  disabled={isLoading}
+                  disabled={isLoading || stripeLoading}
                 >
                   CONTINUE
                 </button>
