@@ -1,5 +1,5 @@
 import { FaPrint } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useOrderDetailsQuery } from "../../redux/api/orderApi";
 import Loader from "../Loader";
 import { useEffect } from "react";
@@ -29,12 +29,12 @@ const OrderDetails = () => {
             <div className="col-12 lg:col-9 mt-5 order-details">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="mt-5 mb-4">Your Order Details</h3>
-                <a
-                  href="/invoice/order/order-id"
+                <Link
+                  to={`/invoice/order/${orderDetails?._id}`}
                   className="btn btn-success text-white"
                 >
                   <FaPrint /> Invoice
-                </a>
+                </Link>
               </div>
               <table className="table table-striped table-bordered mb-8">
                 <tbody>

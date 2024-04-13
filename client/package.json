@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^3.4.2",
     "@reduxjs/toolkit": "^2.2.2",
     "antd": "^5.16.1",
     "countries-list": "^3.1.0",
     "firebase": "^10.10.0",
+    "html-to-pdf": "^0.1.11",
+    "jspdf": "^2.5.1",
     "mdbreact": "^5.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
