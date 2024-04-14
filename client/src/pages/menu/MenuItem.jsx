@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import Loader from "../../components/Loader";
 import StarRatings from "react-star-ratings";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCartItem } from "../../redux/features/cartSlice";
+import NewReview from "../../components/reviews/NewReview";
+import ListReviews from "../../components/reviews/ListReviews";
 
 const MenuItem = () => {
   const params = useParams();
@@ -16,6 +18,8 @@ const MenuItem = () => {
     params.id
   );
   const product = data?.product;
+
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const [activeImg, setActiveImg] = useState("");
 
@@ -178,12 +182,19 @@ const MenuItem = () => {
               {/* <p id="product_seller" className="mb-4">
                 Sold by: <strong>Tech</strong>
               </p> */}
-              <div className="alert alert-danger" role="alert">
-                Login to post your review.
-              </div>
+              {isAuthenticated ? (
+                <NewReview productId={params.id} />
+              ) : (
+                <div className="alert alert-danger" role="alert">
+                  Login to post your review.
+                </div>
+              )}
             </div>
           </div>
         </div>
+        {product?.reviews?.length > 0 && (
+          <ListReviews reviews={product?.reviews} />
+        )}
       </div>
     </div>
   );
