@@ -1,30 +1,17 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Menu from "./pages/menu/Menu";
 import { Toaster } from "react-hot-toast";
-import MenuItem from "./pages/menu/MenuItem";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Profile from "./components/user/Profile";
-import UpdateProfile from "./components/user/UpdateProfile";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UploadAvatar from "./components/user/UploadAvatar";
-import UpdatePassword from "./components/user/UpdatePassword";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
-import Cart from "./components/cart/Cart";
-import Shipping from "./components/cart/Shipping";
-import ConfirmOrder from "./components/cart/ConfirmOrder";
-import PaymentMethod from "./components/cart/PaymentMethods";
+
 import ScrollToTop from "./ScrollToTop";
-import MyOrders from "./components/order/MyOrders";
-import OrderDetails from "./components/order/OrderDetails";
-import Invoice from "./components/invoice/Invoice";
+import useUserRoute from "./components/routes/userRoutes";
+import useAdminRoute from "./components/routes/adminRoutes";
 
 function App() {
+  const userRoutes = useUserRoute();
+  const adminRoutes = useAdminRoute();
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -32,96 +19,8 @@ function App() {
         <ScrollToTop />
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/menu/:id" element={<MenuItem />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<Signup />} />
-          <Route path="/cart" element={<Cart />} />
-
-          <Route
-            path="/me/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/me/update_profile"
-            element={
-              <ProtectedRoute>
-                <UpdateProfile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/me/upload_avatar"
-            element={
-              <ProtectedRoute>
-                <UploadAvatar />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/me/update_password"
-            element={
-              <ProtectedRoute>
-                <UpdatePassword />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/me/orders"
-            element={
-              <ProtectedRoute>
-                <MyOrders />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/me/order/:id"
-            element={
-              <ProtectedRoute>
-                <OrderDetails />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/invoice/order/:id"
-            element={
-              <ProtectedRoute>
-                <Invoice />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/password/reset/:token" element={<ResetPassword />} />
-          <Route
-            path="/shipping"
-            element={
-              <ProtectedRoute>
-                <Shipping />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/confirm"
-            element={
-              <ProtectedRoute>
-                <ConfirmOrder />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/payment_method"
-            element={
-              <ProtectedRoute>
-                <PaymentMethod />
-              </ProtectedRoute>
-            }
-          />
+          {userRoutes}
+          {adminRoutes}
         </Routes>
         <Footer />
       </div>
