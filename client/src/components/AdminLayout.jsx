@@ -6,8 +6,6 @@ import { BiPlus } from "react-icons/bi";
 import { BiTachometer } from "react-icons/bi";
 
 import SideMenu from "./SideMenu";
-import { RxAvatar } from "react-icons/rx";
-import { AiFillLock } from "react-icons/ai";
 
 const AdminLayout = ({ children }) => {
   const menuItems = [
@@ -44,16 +42,18 @@ const AdminLayout = ({ children }) => {
   ];
   return (
     <div className="min-h-screen">
-      <div className="mt-2 mb-2 pt-24 pb-7">
-        <h2 className="text-center font-bold">Admin Dashboard</h2>
-      </div>
-      <div className="">
-        <div className="flex flex-row gap-2 justify-around">
-          <div className="grid grid-cols-1 lg:grid-cols-1">
-            <SideMenu menuItems={menuItems} />
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-1 user-dashboard">
-            {children}
+      <div className="max-w-screen-xl py-11 gap-8  container mx-auto xl:px-24 px-4 bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
+        <div className="mt-2 mb-2 pt-24 pb-7">
+          <h2 className="text-center font-bold">Admin Dashboard</h2>
+        </div>
+        <div className="mx-auto">
+          <div className="flex gap-32">
+            <div className="grid grid-cols-1 lg:grid-cols-1">
+              <SideMenu menuItems={menuItems} />
+            </div>
+            <div className="grid grid-cols-1 flex-1 lg:grid-cols-1 user-dashboard">
+              {children}
+            </div>
           </div>
         </div>
       </div>
