@@ -18,10 +18,12 @@ function App() {
         <Toaster position="top-center" />
         <ScrollToTop />
         <Navbar />
-        <Routes>
-          {userRoutes}
-          {adminRoutes}
-        </Routes>
+        <div className="min-h-screen">
+          <Routes>
+            {userRoutes}
+            {adminRoutes}
+          </Routes>
+        </div>
         <Footer />
       </div>
     </BrowserRouter>

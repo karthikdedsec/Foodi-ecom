@@ -25,7 +25,9 @@ const MenuItem = () => {
 
   useEffect(() => {
     setActiveImg(
-      product?.image[0] ? product?.image[0].url : "/images/default_product.png"
+      product?.image[0].length > 0
+        ? product?.image[0].url
+        : "/images/default_product.png"
     );
   }, [product]);
   // console.log(data);
