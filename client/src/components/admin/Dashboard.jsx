@@ -9,6 +9,11 @@ const Dashboard = () => {
   const [startDate, setStartDate] = useState(new Date().setDate(1));
   const [endDate, setEndDate] = useState(new Date());
 
+  const submitHandler = () => {
+    console.log(new Date(startDate).toISOString());
+    console.log(new Date(endDate).toISOString());
+  };
+
   return (
     <AdminLayout>
       <div className="flex justify-start items-center">
@@ -35,7 +40,12 @@ const Dashboard = () => {
             className="form-control"
           />
         </div>
-        <button className="btn fetch-btn ml-4 mt-3 px-5">Fetch</button>
+        <button
+          onClick={submitHandler}
+          className="btn fetch-btn ml-4 mt-3 px-5"
+        >
+          Fetch
+        </button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 my-5">
