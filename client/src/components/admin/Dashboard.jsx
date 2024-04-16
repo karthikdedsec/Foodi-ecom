@@ -1,18 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminLayout from "../AdminLayout";
 import DatePicker from "react-datepicker";
-
+import toast from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
 import SalesChart from "../charts/SalesChart";
+import { useLazyGetDashboardSalesQuery } from "../../redux/api/orderApi";
+import Loader from "../Loader";
 
 const Dashboard = () => {
   const [startDate, setStartDate] = useState(new Date().setDate(1));
   const [endDate, setEndDate] = useState(new Date());
 
+  const [getDashboardSales, { error, isLoading, data }] =
+    useLazyGetDashboardSalesQuery();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+
+    if (startDate && endDate && !data) {
+      getDashboardSales({
+        startDate: new Date(startDate).toISOString(),
+        endDate: endDate.toISOString(),
+      });
+    }
+  }, [error]);
+
   const submitHandler = () => {
-    console.log(new Date(startDate).toISOString());
-    console.log(new Date(endDate).toISOString());
+    getDashboardSales({
+      startDate: new Date(startDate).toISOString(),
+      endDate: endDate.toISOString(),
+    });
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <AdminLayout>
@@ -52,19 +76,23 @@ const Dashboard = () => {
         <div className="bg-green-500 text-white rounded-lg shadow-md overflow-hidden">
           <div className="p-4">
             <div className="text-center text-xl font-bold">Sales</div>
-            <div className="text-center text-2xl font-bold">$0.00</div>
+            <div className="text-center text-2xl font-bold">
+              ${data?.totalSales?.toFixed(2)}
+            </div>
           </div>
         </div>
 
         <div className="bg-red-500 text-white rounded-lg shadow-md overflow-hidden">
           <div className="p-4">
             <div className="text-center text-xl font-bold">Orders</div>
-            <div className="text-center text-2xl font-bold">0</div>
+            <div className="text-center text-2xl font-bold">
+              {data?.totalNumOrders}
+            </div>
           </div>
         </div>
       </div>
 
-      <SalesChart />
+      <SalesChart salesData={data?.sales} />
 
       <div className="mb-5"></div>
     </AdminLayout>
