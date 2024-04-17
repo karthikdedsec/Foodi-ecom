@@ -3,6 +3,7 @@ import Product from "../models/product.js";
 import APIFilters from "../utils/apiFilters.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import Order from "../models/order.js";
+import { upload_file } from "../utils/cloudinary.js";
 
 // get all products => /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res, next) => {
@@ -55,6 +56,27 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
   product = await Product.findByIdAndUpdate(req?.params?.id, req.body, {
     new: true,
   });
+
+  res.status(200).json({
+    product,
+  });
+});
+
+// upload product images => api/v1/admin/product/:id/upload_images
+export const uploadProductImages = catchAsyncErrors(async (req, res, next) => {
+  let product = await Product.findById(req?.params?.id);
+
+  if (!product) {
+    return next(new ErrorHandler("product not found", 404));
+  }
+
+  const uploader = async (image) => upload_file(image, "foodi/products");
+
+  const urls = await Promise.all((req?.body?.images).map(uploader));
+
+  product?.image?.push(...urls);
+
+  await product?.save({ validateBeforeSave: false });
 
   res.status(200).json({
     product,
