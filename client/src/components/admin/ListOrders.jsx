@@ -7,31 +7,33 @@ import Loader from "../Loader";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
 
-import { useDeleteProductMutation } from "../../redux/api/productsApi";
 import AdminLayout from "../AdminLayout";
-import { useGetAdminOrdersQuery } from "../../redux/api/orderApi";
+import {
+  useDeleteOrderMutation,
+  useGetAdminOrdersQuery,
+} from "../../redux/api/orderApi";
 
 const ListOrders = () => {
   const { isLoading, error, data } = useGetAdminOrdersQuery();
 
-  const [deleteProduct, { isLoading: loading, error: deleteError, isSuccess }] =
-    useDeleteProductMutation();
+  const [deleteOrder, { isLoading: loading, error: deleteError, isSuccess }] =
+    useDeleteOrderMutation();
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
-    // if (isSuccess) {
-    //   toast.success("product deleted");
-    // }
-  }, [error]);
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
+    if (isSuccess) {
+      toast.success("order deleted");
+    }
+  }, [error, deleteError, isSuccess]);
 
-  //   const deleteProducts = (id) => {
-  //     deleteProduct(id);
-  //   };
+  const deleteOrderHandler = (id) => {
+    deleteOrder(id);
+  };
 
   const dataSource =
     data?.orders?.map((order) => ({
@@ -47,7 +49,7 @@ const ListOrders = () => {
 
           <button
             className="btn btn-outline"
-            // onClick={() => deleteProducts(product?._id)}
+            onClick={() => deleteOrderHandler(order?._id)}
             disabled={loading}
           >
             <BiTrashAlt />
