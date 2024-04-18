@@ -85,7 +85,7 @@ const MenuItem = () => {
       <div className="max-w-screen-xl container mx-auto xl:px-24 px-4 bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
         <div className=" mx-auto pt-32">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="md:flex flex-col gap-6 md:items-center">
+            <div className="md:flex flex-col lg:flex-row-reverse gap-6 md:items-center">
               <div className="mx-auto">
                 <img
                   className=" md:max-w-lg mx-auto max-w-72 max-h-72"
@@ -93,7 +93,7 @@ const MenuItem = () => {
                   alt="Product Image"
                 />
               </div>
-              <div className="flex flex-row mt-5">
+              <div className="flex flex-row lg:flex-col mt-5">
                 {product?.image?.map((img) => (
                   <div key={img?._id} className="col-2 ms-4 mt-2">
                     <a role="button">

@@ -62,6 +62,25 @@ export const productApi = createApi({
       },
       invalidatesTags: ["Product"],
     }),
+    deleteProductImages: builder.mutation({
+      query({ id, body }) {
+        return {
+          url: `/admin/product/${id}/delete_images`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Product"],
+    }),
+    deleteProduct: builder.mutation({
+      query(id) {
+        return {
+          url: `/admin/product/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["AdminProducts"],
+    }),
   }),
 });
 
@@ -73,4 +92,6 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useUploadProductImagesMutation,
+  useDeleteProductImagesMutation,
+  useDeleteProductMutation,
 } = productApi;

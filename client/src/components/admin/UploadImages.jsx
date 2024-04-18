@@ -3,6 +3,7 @@ import { BiTrash } from "react-icons/bi";
 import AdminLayout from "../AdminLayout";
 import { useEffect, useRef, useState } from "react";
 import {
+  useDeleteProductImagesMutation,
   useGetProductDetailsQuery,
   useUploadProductImagesMutation,
 } from "../../redux/api/productsApi";
@@ -22,6 +23,11 @@ const UploadImages = () => {
   const [uploadProductImages, { isLoading, error, isSuccess }] =
     useUploadProductImagesMutation();
 
+  const [
+    deleteProductImages,
+    { isLoading: isDeleteLoading, error: deleteError },
+  ] = useDeleteProductImagesMutation();
+
   useEffect(() => {
     if (data?.product) {
       setUploadedImages(data?.product?.image);
@@ -29,13 +35,15 @@ const UploadImages = () => {
 
     if (error) {
       toast.error(error?.data?.message);
-      console.log(error);
+    }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
     }
 
     if (isSuccess) {
       toast.success("images uploaded");
     }
-  }, [data, error, isSuccess]);
+  }, [data, error, isSuccess, deleteError]);
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
@@ -71,6 +79,10 @@ const UploadImages = () => {
     e.preventDefault();
 
     uploadProductImages({ id: params?.id, body: { images } });
+  };
+
+  const deleteImage = (imgId) => {
+    deleteProductImages({ id: params?.id, body: { imgId } });
   };
 
   return (
@@ -155,7 +167,8 @@ const UploadImages = () => {
                             borderColor: "#dc3545",
                           }}
                           className="block w-full text-white bg-red-500 border border-red-500 rounded-b-none py-1 px-2 text-center"
-                          disabled="true"
+                          disabled={isLoading || isDeleteLoading}
+                          onClick={() => deleteImage(img.public_id)}
                           type="button"
                         >
                           <BiTrash />
@@ -172,7 +185,7 @@ const UploadImages = () => {
               id="register_button"
               type="submit"
               className="bg-bGreen btn text-white font-bold py-2 px-4 rounded w-full"
-              disabled={isLoading}
+              disabled={isLoading || isDeleteLoading}
             >
               {isLoading ? "uploading" : "upload"}
             </button>

@@ -7,17 +7,33 @@ import Loader from "../Loader";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
 
-import { useGetProductsQuery } from "../../redux/api/productsApi";
+import {
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "../../redux/api/productsApi";
 import AdminLayout from "../AdminLayout";
 
 const ListProducts = () => {
   const { isLoading, error, data } = useGetProductsQuery();
 
+  const [deleteProduct, { isLoading: loading, error: deleteError, isSuccess }] =
+    useDeleteProductMutation();
+
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
-  }, [error]);
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
+    if (isSuccess) {
+      toast.success("product deleted");
+    }
+  }, [error, deleteError, isSuccess]);
+
+  const deleteProducts = (id) => {
+    deleteProduct(id);
+  };
 
   const dataSource =
     data?.products?.map((product) => ({
@@ -36,7 +52,11 @@ const ListProducts = () => {
           >
             <AiOutlineFileImage />
           </Link>
-          <button className="btn btn-outline">
+          <button
+            className="btn btn-outline"
+            onClick={() => deleteProducts(product?._id)}
+            disabled={loading}
+          >
             <BiTrashAlt />
           </button>
         </div>
