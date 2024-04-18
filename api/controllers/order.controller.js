@@ -85,7 +85,7 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No Orders", 404));
   }
 
-  if (order?.orderStatus === "delivered") {
+  if (order?.orderStatus === "Delivered") {
     return next(new ErrorHandler("Already delivered this order", 400));
   }
 
