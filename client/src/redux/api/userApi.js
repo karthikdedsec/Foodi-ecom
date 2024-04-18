@@ -71,6 +71,11 @@ export const userApi = createApi({
         };
       },
     }),
+    getAdminUsers: builder.query({
+      query: () => ({
+        url: "/admin/users",
+      }),
+    }),
   }),
 });
 
@@ -81,4 +86,5 @@ export const {
   useUpdatePasswordMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useGetAdminUsersQuery,
 } = userApi;
