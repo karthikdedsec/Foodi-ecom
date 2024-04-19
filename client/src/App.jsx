@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./ScrollToTop";
 import useUserRoute from "./components/routes/userRoutes";
 import useAdminRoute from "./components/routes/adminRoutes";
+import NotFound from "./components/NotFound";
 
 function App() {
   const userRoutes = useUserRoute();
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             {userRoutes}
             {adminRoutes}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <Footer />

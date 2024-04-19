@@ -122,7 +122,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle mr-3 items-center hidden md:flex"
+            className="btn btn-ghost btn-circle mr-3 items-center  md:flex"
             onClick={cartButton}
           >
             <div className="indicator">

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCartItem } from "../../redux/features/cartSlice";
 import NewReview from "../../components/reviews/NewReview";
 import ListReviews from "../../components/reviews/ListReviews";
+import NotFound from "../../components/NotFound";
 
 const MenuItem = () => {
   const params = useParams();
@@ -77,6 +78,9 @@ const MenuItem = () => {
 
   if (isLoading) {
     return <Loader />;
+  }
+  if (error && error?.status === 404) {
+    return <NotFound />;
   }
 
   return (
