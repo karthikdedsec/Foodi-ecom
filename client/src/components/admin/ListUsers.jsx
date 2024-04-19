@@ -8,16 +8,21 @@ import { Table } from "antd";
 import { Link } from "react-router-dom";
 
 import AdminLayout from "../AdminLayout";
-import { useDeleteOrderMutation } from "../../redux/api/orderApi";
-import { useGetAdminUsersQuery } from "../../redux/api/userApi";
+
+import {
+  useDeleteAdminUserMutation,
+  useGetAdminUsersQuery,
+} from "../../redux/api/userApi";
 
 const ListUsers = () => {
   const { isLoading, error, data } = useGetAdminUsersQuery();
 
   const users = data?.users || {};
 
-  const [deleteOrder, { isLoading: loading, error: deleteError, isSuccess }] =
-    useDeleteOrderMutation();
+  const [
+    deleteAdminUser,
+    { isLoading: loading, error: deleteError, isSuccess },
+  ] = useDeleteAdminUserMutation();
 
   useEffect(() => {
     if (error) {
@@ -27,12 +32,12 @@ const ListUsers = () => {
       toast.error(deleteError?.data?.message);
     }
     if (isSuccess) {
-      toast.success("order deleted");
+      toast.success("user deleted");
     }
   }, [error, deleteError, isSuccess]);
 
   const deleteUserHandler = (id) => {
-    deleteOrder(id);
+    deleteAdminUser(id);
   };
 
   const dataSource =
@@ -48,7 +53,11 @@ const ListUsers = () => {
             <BiPencil />
           </Link>
 
-          <button className="btn btn-outline" disabled={loading}>
+          <button
+            className="btn btn-outline"
+            disabled={loading}
+            onClick={() => deleteUserHandler(user?._id)}
+          >
             <BiTrashAlt />
           </button>
         </div>
