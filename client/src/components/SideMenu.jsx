@@ -27,7 +27,9 @@ const SideMenu = ({ menuItems }) => {
             onClick={() => handleMenuItemClick(item.url)}
           >
             {item.icon}
-            <span className="ml-4 inline-block align-middle">{item.name}</span>
+            <span className="ml-4 hidden md:inline-block align-middle">
+              {item.name}
+            </span>
           </Link>
         </>
       ))}

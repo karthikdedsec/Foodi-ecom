@@ -40,36 +40,10 @@ const Navbar = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <details>
-          <summary>Menu</summary>
-          <ul className="p-2">
-            <li>
-              <Link to={`/menu`}>All</Link>
-            </li>
-            <li>
-              <Link>Salad</Link>
-            </li>
-            <li>
-              <Link>Pizza</Link>
-            </li>
-          </ul>
-        </details>
+        <Link to={`/menu`}>Menu</Link>
       </li>
       <li>
-        <details>
-          <summary>Services</summary>
-          <ul className="p-2">
-            <li>
-              <Link>Online Order</Link>
-            </li>
-            <li>
-              <Link>Table Booking</Link>
-            </li>
-            <li>
-              <Link>Order Tracking</Link>
-            </li>
-          </ul>
-        </details>
+        <Link>Services</Link>
       </li>
       <li>
         <Link>Offers</Link>

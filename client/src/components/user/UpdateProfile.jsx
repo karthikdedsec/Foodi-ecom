@@ -43,8 +43,8 @@ const UpdateProfile = () => {
 
   return (
     <UserLayout>
-      <div className="container mx-auto xl:px-24 px-4 bg-white shadow-lg">
-        <div className="mx-auto">
+      <div className=" container mx-auto xl:px-24 px-4 bg-white shadow-lg">
+        <div className="">
           <h2 className="text-center text-2xl font-bold text-[#151515] py-6">
             Update Profile
           </h2>

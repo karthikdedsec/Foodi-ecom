@@ -100,9 +100,9 @@ const Menu = () => {
               Where Each Plate Weaves a Story of Culinary Mastery and Passionate
               Craftsmanship
             </p>
-            <button className="py-3 px-8 bg-bGreen font-semibold text-white rounded-full">
+            {/* <button className="py-3 px-8 bg-bGreen font-semibold text-white rounded-full">
               Order Now
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

@@ -47,8 +47,8 @@ const AdminLayout = ({ children }) => {
           <h2 className="text-center font-bold">Admin Dashboard</h2>
         </div>
         <div className="mx-auto">
-          <div className="flex flex-col md:flex-row gap-32">
-            <div className="grid grid-cols-1 lg:grid-cols-1">
+          <div className="flex md:flex-row gap-5">
+            <div className="flex md:flex-col">
               <SideMenu menuItems={menuItems} />
             </div>
             <div className="grid grid-cols-1 flex-1 lg:grid-cols-1 user-dashboard">

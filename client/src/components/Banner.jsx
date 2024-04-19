@@ -1,6 +1,13 @@
 import girl from "../assets/images/home/banner.png";
 import food1 from "../assets/images/home/b-food1.png";
+import { useNavigate } from "react-router-dom";
 const Banner = () => {
+  const navigate = useNavigate();
+
+  const navigateHandler = () => {
+    navigate("/menu");
+  };
+
   return (
     <div className="max-w-screen-2xl container mx-auto xl:px-24 px-4 bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
       <div className="py-24 flex flex-col md:flex-row-reverse justify-between items-center md:gap-3 gap-28">
@@ -104,7 +111,10 @@ const Banner = () => {
             Where Each Plate Weaves a Story of Culinary Mastery and Passionate
             Craftsmanship
           </p>
-          <button className="py-3 px-8 bg-bGreen font-semibold text-white rounded-full">
+          <button
+            onClick={navigateHandler}
+            className="py-3 px-8 bg-bGreen font-semibold text-white rounded-full"
+          >
             Order Now
           </button>
         </div>
