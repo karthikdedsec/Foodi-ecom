@@ -68,7 +68,7 @@ const Cart = () => {
                   key={item?.product}
                   className="flex items-center justify-around border-b border-gray-200 py-2"
                 >
-                  <div className="flex items-center space-x-7">
+                  <div className="flex items-center gap-2">
                     <img
                       src={item?.image}
                       alt={item?.name}
