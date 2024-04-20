@@ -7,6 +7,7 @@ import PaymentRoute from "./routes/payment.route.js";
 import { connectDataBase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 const app = express();
 
@@ -20,6 +21,9 @@ process.on("uncaughtException", (err) => {
 dotenv.config({ path: "api/config/config.env" });
 
 connectDataBase();
+
+const __dirname = path.resolve();
+
 app.use(
   express.json({
     limit: "10mb",
@@ -30,16 +34,21 @@ app.use(
 );
 app.use(cookieParser());
 
+const server = app.listen(process.env.PORT, () => {
+  console.log(`listening to port:${process.env.PORT} `);
+});
 app.use("/api/v1", ProductRoute);
 app.use("/api/v1", AuthRoute);
 app.use("/api/v1", OrderRoute);
 app.use("/api/v1", PaymentRoute);
 
-app.use(errorMiddleware);
+app.use(express.static(path.join(__dirname, "/client/dist")));
 
-const server = app.listen(process.env.PORT, () => {
-  console.log(`listening to port:${process.env.PORT} `);
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
+
+app.use(errorMiddleware);
 
 //handle unhandled promise rejection
 
