@@ -43,7 +43,12 @@ const Cards = ({ recipes }) => {
               <span className="text-sm text-reddish">$</span>
               {recipes.price}
             </h5>
-            <button className="btn bg-bGreen text-white">Buy Now</button>
+            <Link
+              to={`/menu/${recipes._id}`}
+              className="btn bg-bGreen text-white"
+            >
+              Buy Now
+            </Link>
           </div>
         </div>
       </div>
