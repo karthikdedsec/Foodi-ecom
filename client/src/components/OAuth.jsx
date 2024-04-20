@@ -61,7 +61,7 @@ const OAuth = () => {
       >
         <BsGoogle className="text-base" />
       </button>
-      <button
+      {/* <button
         type="button"
         className="bg-gray-200 p-3 rounded-full border-green-500 border-2"
       >
@@ -72,7 +72,7 @@ const OAuth = () => {
         className="bg-gray-200 p-3 rounded-full border-green-500 border-2"
       >
         <AiFillGithub className="text-2xl" onClick={handleGithubClick} />
-      </button>
+      </button> */}
     </div>
   );
 };

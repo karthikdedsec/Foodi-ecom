@@ -83,8 +83,10 @@ const Login = () => {
                 Create A New Account
               </Link>
             </div>
-            <p className="text-center">Or sign in with</p>
-            <OAuth />
+            <div className="flex items-center gap-2 justify-center">
+              <p className="text-center">Or sign in with</p>
+              <OAuth />
+            </div>
           </form>
         </div>
       </div>

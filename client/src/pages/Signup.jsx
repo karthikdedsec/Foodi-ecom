@@ -3,6 +3,7 @@ import { useRegisterMutation } from "../redux/api/authApi";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import OAuth from "../components/OAuth";
+import { useSelector } from "react-redux";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -10,12 +11,16 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [register, { isLoading, error, data }] = useRegisterMutation();
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
     if (error) {
       toast.error(error?.data?.message);
     }
-  }, [error]);
+  }, [error, isAuthenticated]);
 
   const handleSingUp = (e) => {
     e.preventDefault();
@@ -85,8 +90,10 @@ const Signup = () => {
                 Sign In
               </Link>
             </div>
-            <p className="text-center">Or sign in with</p>
-            <OAuth />
+            <div className="flex items-center gap-2 justify-center">
+              <p className="text-center">Or sign in with</p>
+              <OAuth />
+            </div>
           </form>
         </div>
       </div>
