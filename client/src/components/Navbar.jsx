@@ -60,7 +60,7 @@ const Navbar = () => {
     navigate("/cart");
   };
   return (
-    <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-400 ease-in-out z-40">
+    <header className=" mx-auto fixed top-0 left-0 right-0 transition-all duration-400 ease-in-out z-40">
       <div
         className={`navbar xl:px-24 ${
           isSticky
